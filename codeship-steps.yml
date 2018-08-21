@@ -1,0 +1,8 @@
+- name: test
+  tag: master
+  type: serial
+  steps:
+    - service: api
+      command: npm run test
+    - service: frontend
+      command: npm run test

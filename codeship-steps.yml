@@ -2,7 +2,21 @@
   tag: master
   type: serial
   steps:
-    - service: api
+    - service: api-test
       command: npm run test
-    - service: frontend
+    - service: frontend-test
       command: npm run test
+- name: push api container
+  tag: master
+  type: push
+  service: api
+  image_name: ataquino/boilerplate-spa-api
+  image_tag: latest
+  encrypted_dockercfg_path: dockercfg.encrypted
+- name: push frontend container
+  tag: master
+  type: push
+  service: frontend
+  image_name: ataquino/boilerplate-spa-frontend
+  image_tag: latest
+  encrypted_dockercfg_path: dockercfg.encrypted

@@ -1,10 +1,18 @@
 version: '3'
 services:
-  api:
+  api-test:
     build:
       context: ./api
       dockerfile: Dockerfile.test
-  frontend:
+  frontend-test:
     build:
       context: ./frontend
       dockerfile: Dockerfile.test
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.prod
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod

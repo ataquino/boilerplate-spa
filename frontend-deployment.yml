@@ -14,8 +14,10 @@ spec:
         app: boilerplate-spa
         tier: frontend
     spec:
+      terminationGracePeriodSeconds: 60
       containers:
         - name: boilerplate-spa-frontend
           image: ataquino/boilerplate-spa-frontend
+          imagePullPolicy: "Always"
           ports:
             - containerPort: 80

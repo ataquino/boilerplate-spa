@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  selector:
+    matchLabels:
+      app: boilerplate-spa
+      tier: frontend
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: boilerplate-spa
+        tier: frontend
+    spec:
+      containers:
+        - name: boilerplate-spa-frontend
+          image: ataquino/boilerplate-spa-frontend
+          ports:
+            - containerPort: 80

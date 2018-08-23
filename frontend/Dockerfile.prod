@@ -4,6 +4,7 @@ WORKDIR /usr/app
 
 COPY ./ ./
 RUN npm install --no-progress --ignore-optional
+ENV NODE_ENV=production
 RUN npm run build
 
 FROM nginx:latest

@@ -2,13 +2,6 @@
 
 set -e
 
-GOOGLE_PROJECT_ID=boilerplate-spa
-KUBERNETES_APP_NAME=boilerplate-spa-frontend
-DEFAULT_ZONE=southamerica-east1-b
-DEPLOYMENT_CONFIG=frontend-deployment.yml
-DEPLOYMENT_NAME=frontend
-SERVICE_NAME=frontend-loadbalancer
-
 codeship_google authenticate
 
 echo "Setting default timezone $DEFAULT_ZONE"

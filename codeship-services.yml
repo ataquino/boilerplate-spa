@@ -1,20 +1,10 @@
 version: '3'
 services:
-# api-test:
-#   build:
-#     context: ./api
-#     dockerfile: Dockerfile.test
   frontend-test:
     build:
-      context: ./frontend
       dockerfile: Dockerfile.test
-#  api:
-#    build:
-#      context: ./api
-#      dockerfile: Dockerfile.prod
   frontend:
     build:
-      context: ./frontend
       dockerfile: Dockerfile.prod
   codeshipgcrdockercfg:
     image: codeship/gcr-dockercfg-generator

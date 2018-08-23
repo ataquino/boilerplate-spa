@@ -1,0 +1,1 @@
+[ ![Codeship Status for ataquino/boilerplate-spa-frontend](https://app.codeship.com/projects/c440e9d0-87b6-0136-7933-2289b1b54605/status?branch=master)](https://app.codeship.com/projects/302746)

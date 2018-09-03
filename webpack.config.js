@@ -1,20 +1,35 @@
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   mode: devMode ? 'development' : 'production',
-  entry: './src/index.jsx',
+  entry: devMode ? './src/client/index.jsx' : {
+    app: './src/client/index.jsx',
+    server: './index.js',
+  },
+  target: devMode ? 'web' : 'node',
   output: {
     path: `${__dirname}/dist`,
-    filename: './app.js',
+    filename: devMode ? 'app.js' : '[name].js',
   },
   devServer: {
     host: '0.0.0.0',
     port: 8080,
     contentBase: './public',
+    watchContentBase: true,
+    /*
+    proxy: [
+      {
+        context: ['/api'],
+        target: process.env.API_HOST,
+        secure: false,
+      },
+    ],
+    */
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -24,6 +39,7 @@ module.exports = {
     },
   },
   plugins: [
+    new Dotenv(),
     new webpack.ProgressPlugin(),
     new CopyWebpackPlugin(['public']),
     new MiniCssExtractPlugin({
@@ -44,12 +60,13 @@ module.exports = {
           },
         },
       },
+      /*
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          'style-loader',
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           { loader: 'css-loader', options: { url: false } },
-          // 'postcss-loader',
+          'postcss-loader',
           'sass-loader',
         ],
       },
@@ -57,6 +74,7 @@ module.exports = {
         test: /\.woff|.woff2|.ttf|.eot|.svg*.*$/,
         use: 'file-loader',
       },
+      */
       {
         test: /\.(png|jpg)$/,
         use: 'url-loader?limit=8192',

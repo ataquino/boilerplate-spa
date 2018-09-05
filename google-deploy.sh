@@ -37,4 +37,4 @@ echo "Listing pods"
 kubectl get pods
 
 echo "Teardown"
-gcloud container clusters delete $KUBERNETES_APP_NAME --quiet
+#gcloud container clusters delete $KUBERNETES_APP_NAME --quiet

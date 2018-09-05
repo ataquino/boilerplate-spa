@@ -8,7 +8,7 @@
   type: push
   service: frontend
   image_name: ataquino/boilerplate-spa-frontend
-  image_tag: "{{.CommitID}}"
+  image_tag: "{{.CommitDescription}}"
   encrypted_dockercfg_path: dockercfg.encrypted
 - name: push master container
   tag: ^(\d+\.)?(\d+\.)?(\d+)$

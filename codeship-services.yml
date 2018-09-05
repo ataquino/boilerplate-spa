@@ -6,6 +6,7 @@ services:
   frontend:
     build:
       dockerfile: Dockerfile.prod
+      encrypted_args_file: build-args.encrypted
   codeshipgcrdockercfg:
     image: codeship/gcr-dockercfg-generator
     encrypted_env_file: gcp-env.encrypted

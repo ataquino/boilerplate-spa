@@ -1,35 +1,10 @@
 const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const Dotenv = require('dotenv-webpack');
+const path = require('path');
 
-const devMode = process.env.NODE_ENV !== 'production';
-
-module.exports = {
-  mode: devMode ? 'development' : 'production',
-  entry: devMode ? './src/client/index.jsx' : {
-    app: './src/client/index.jsx',
-    server: './index.js',
-  },
-  target: devMode ? 'web' : 'node',
+const baseConfig = {
   output: {
-    path: `${__dirname}/dist`,
-    filename: devMode ? 'app.js' : '[name].js',
-  },
-  devServer: {
-    host: '0.0.0.0',
-    port: 8080,
-    contentBase: './public',
-    watchContentBase: true,
-    /*
-    proxy: [
-      {
-        context: ['/api'],
-        target: process.env.API_HOST,
-        secure: false,
-      },
-    ],
-    */
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -38,15 +13,6 @@ module.exports = {
       app: `${__dirname}/src`,
     },
   },
-  plugins: [
-    new Dotenv(),
-    new webpack.ProgressPlugin(),
-    new CopyWebpackPlugin(['public']),
-    new MiniCssExtractPlugin({
-      filename: devMode ? '[name].css' : '[name].[hash].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
-    }),
-  ],
   module: {
     rules: [
       {
@@ -60,29 +26,36 @@ module.exports = {
           },
         },
       },
-      /*
-      {
-        test: /\.(sa|sc|c)ss$/,
-        use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          { loader: 'css-loader', options: { url: false } },
-          'postcss-loader',
-          'sass-loader',
-        ],
-      },
-      {
-        test: /\.woff|.woff2|.ttf|.eot|.svg*.*$/,
-        use: 'file-loader',
-      },
-      */
       {
         test: /\.(png|jpg)$/,
         use: 'url-loader?limit=8192',
       },
     ],
   },
-  watchOptions: {
-    aggregateTimeout: 300,
-    poll: 1000,
+  plugins: [
+    new webpack.ProgressPlugin(),
+  ],
+};
+
+const clientConfig = {
+  target: 'web',
+  entry: {
+    app: './src/client/index.jsx',
   },
+};
+
+const serverConfig = {
+  target: 'node',
+  entry: {
+    server: './src/server.jsx',
+  },
+  node: {
+    __dirname: false,
+  },
+};
+
+module.exports = {
+  baseConfig,
+  clientConfig,
+  serverConfig,
 };

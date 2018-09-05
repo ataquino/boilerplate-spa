@@ -15,6 +15,7 @@ export default ({
       <style type="text/css" id="ssr-styles">
         ${styles}
       </style>
+      <script src="app.js"></script>
     </body>
   </html>
 `;

@@ -9,7 +9,7 @@ import {
   Button,
   Grid,
 } from '@material-ui/core';
-import { Favorite, OpenInNew } from '@material-ui/icons';
+// import { Favorite, OpenInNew } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Github from '../styles/icons/github';
@@ -18,7 +18,7 @@ const styles = theme => ({
   flex: {
     flexGrow: 1,
   },
-  toolbarLink: {
+  link: {
     textDecoration: 'none',
   },
   buttonIcon: {
@@ -44,7 +44,7 @@ const Home = (props) => {
           <Typography variant="title" color="inherit" className={classes.flex}>
             Boilerplate
           </Typography>
-          <Link to="/console" className={classes.toolbarLink}><Button variant="flat" color="secondary">Pricing</Button></Link>
+          <Link to="/console" className={classes.link}><Button variant="flat" color="secondary">Pricing</Button></Link>
           <Button variant="raised" color="secondary">
             go to console
           </Button>
@@ -54,7 +54,7 @@ const Home = (props) => {
         <Grid container spacing={16} className={classes.jumbotron}>
           <Grid item xs={12}>
             <Typography variant="display1" color="secondary">
-              One SPA boilerplate code to rule them all!
+              One SPA boilerplate code to rule them all! {process.env.API_URL}
             </Typography>
             <p>
               <Typography variant="headline" color="inherit">
@@ -62,16 +62,21 @@ const Home = (props) => {
                 <br />
                 Powered by React + Material-ui.
                 <br />
-                Made with <Favorite fontSize="inherit" color="secondary" /> in São Paulo, Brazil.
+                Made with <Github fontSize="inherit" color="secondary" /> in São Paulo, Brazil.
               </Typography>
             </p>
           </Grid>
           <Grid item xs={12} align="right">
             <Button variant="raised" color="secondary" className={classes.jumbotronButton}>
-              <OpenInNew className={classes.buttonIcon} />
+              <Github className={classes.buttonIcon} />
               boilerplate API
             </Button>
-            <a href="https://github.com/ataquino/boiletplate-spa-frontend" rel="noopener noreferrer" target="_blank">
+            <a
+              href="https://github.com/ataquino/boiletplate-spa-frontend"
+              rel="noopener noreferrer"
+              target="_blank"
+              className={classes.link}
+            >
               <Button variant="outlined" color="secondary">
                 <Github className={classes.buttonIcon} />
                 view source code

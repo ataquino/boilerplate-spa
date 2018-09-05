@@ -1,13 +1,23 @@
-FROM node:8.11.4
+ARG NODE_VER
+
+# build
+FROM node:$NODE_VER
 
 WORKDIR /usr/app
-
 COPY ./ ./
-RUN npm install --no-progress --ignore-optional
-RUN npm run build
 
-FROM node:8.11.4
+RUN npm install --no-progress --ignore-optional
+
+ARG NODE_ENV
+ARG PORT
+ARG API_URL
+
+RUN NODE_ENV=$NODE_ENV PORT=$PORT PORT=$PORT npm run build
+
+# run
+FROM node:$NODE_VER
 COPY --from=0 /usr/app/dist ./
 COPY package-lock.json package.json ./
+
 RUN npm install --no-progress --production
-RUN npm start
+CMD npm start

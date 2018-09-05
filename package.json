@@ -1,6 +1,6 @@
 {
   "name": "boilerplate-frontend-material",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Boilerplate SPA frontend using Material-ui",
   "main": "index.js",
   "scripts": {

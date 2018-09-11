@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const baseConfig = {
   output: {
@@ -42,6 +44,23 @@ const clientConfig = {
   entry: {
     app: './src/client/index.jsx',
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      },
+    }),
+    new CopyWebpackPlugin(['public'], {
+      ignore: ['index.html'],
+    }),
+  ],
+  /* optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        exclude: /server\.js/,
+      }),
+    ],
+  }, */
 };
 
 const serverConfig = {

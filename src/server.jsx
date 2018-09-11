@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import proxy from 'http-proxy-middleware';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { JssProvider, SheetsRegistry } from 'react-jss';
@@ -14,6 +15,12 @@ const server = express();
 server.set('port', process.env.PORT || 8080);
 
 server.use(express.static(path.resolve(__dirname)));
+server.use('/api', proxy({
+  target: process.env.API_URL,
+  changeOrigin: true,
+  pathRewrite: { '^/api': '' },
+}));
+
 server.get('*', (req, res) => {
   const sheetsRegistry = new SheetsRegistry();
   const sheetsManager = new Map();

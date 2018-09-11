@@ -7,15 +7,23 @@ const devConfig = {
   entry: {
     app: './src/client/index.jsx',
   },
-  pugins: [
+  plugins: [
     new Dotenv(),
-
   ],
   devServer: {
     host: '0.0.0.0',
     port: 8080,
     contentBase: './public',
     watchContentBase: true,
+    historyApiFallback: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4000/api/v1',
+        pathRewrite: {
+          '^/api': '',
+        },
+      },
+    },
   },
 };
 

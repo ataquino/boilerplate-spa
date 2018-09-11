@@ -19,6 +19,16 @@ else
   gcloud container clusters get-credentials $KUBERNETES_APP_NAME
 fi
 
+echo "Creating configurations"
+if kubectl get configmap | grep 'frontend-config'; then
+  kubectl delete configmap frontend-config;
+fi
+
+kubectl create configmap frontend-config \
+  --from-literal=NODE_ENV=$NODE_ENV \
+  --from-literal=PORT=$PORT \
+  --from-literal=API_URL=$API_URL;
+
 echo "Deploying"
 kubectl apply -f $DEPLOYMENT_CONFIG
 
@@ -27,7 +37,8 @@ if ! kubectl get service | grep $SERVICE_NAME; then
   kubectl expose deployment $DEPLOYMENT_NAME \
     --name=$SERVICE_NAME \
     --type=LoadBalancer \
-    --port 80;
+    --port 80 \
+    --targetPort $PORT;
 fi
 
 echo "Listing services"

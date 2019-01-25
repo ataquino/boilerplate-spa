@@ -2,17 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet-async';
 import Route from 'react-router-dom/Route';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Drawer from '@material-ui/core/Drawer';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import withStyles from '@material-ui/core/styles/withStyles';
+import {
+  CssBaseline,
+  AppBar,
+  Drawer,
+  Toolbar,
+  Typography,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+} from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import Home from '@material-ui/icons/Home';
 import SecurityAccount from 'mdi-material-ui/SecurityAccount';
 import Index from './console/index';

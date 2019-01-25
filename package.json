@@ -3,6 +3,7 @@
   "version": "0.0.3",
   "description": "Boilerplate SPA frontend using Material-ui",
   "main": "index.js",
+  "sideEffects": false,
   "scripts": {
     "test": "npm run lint",
     "lint": "eslint .",

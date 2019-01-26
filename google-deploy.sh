@@ -38,7 +38,7 @@ if ! kubectl get service | grep $SERVICE_NAME; then
     --name=$SERVICE_NAME \
     --type=LoadBalancer \
     --port 80 \
-    --targetPort $PORT;
+    --target-port $PORT;
 fi
 
 echo "Listing services"
